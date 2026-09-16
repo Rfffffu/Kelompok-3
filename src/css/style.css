@@ -174,16 +174,53 @@ input[type="checkbox"]:active {
 }
 
 
-/*
-  TODO (Fitur #2 - Edit Task):
-  Tambahkan style untuk mode edit, misalnya input text yang muncul
-  menggantikan <span> saat task sedang diedit.
-*/
+/* Fitur #2 - Edit Task */
+.task-item span {
+  flex: 1;
+}
+
+.task-item .editbtn {
+  border: none;
+  background: transparent;
+  color: #4f46e5;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-left: auto;
+}
+
+.task-item .editbtn:hover {
+  text-decoration: underline;
+}
+
+.task-item .savebtn {
+  border: none;
+  background: #10b981;
+  color: white;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.task-item .savebtn:hover {
+  background: #059669;
+}
+
+.task-item .editbox {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #4f46e5;
+  border-radius: 4px;
+  font-size: 1rem;
+}
 
 /*
   TODO (Fitur #5 & #6 - Counter & Clear Completed):
   Tambahkan style untuk .footer yang berisi counter task dan tombol
   "Hapus yang Selesai".
+<<<<<<< HEAD
 */
 .footer {
   display: flex;
@@ -199,3 +236,6 @@ input[type="checkbox"]:active {
   font-weight: 500;
 }
 
+=======
+*/
+>>>>>>> b109b87 (feat: implement fitur edit task)

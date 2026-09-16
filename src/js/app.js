@@ -76,11 +76,37 @@ function renderTasks() {
     span.className = "task-text";
 
     // TODO (Fitur #2 - Edit Task):
-    // Tambahkan tombol "Edit" di sini. Saat diklik, ganti `span`
-    // menjadi <input> berisi teks task supaya bisa diubah,
-    // lalu simpan perubahannya saat user menekan Enter / klik Save.
-    const editBtn = document.createElement("button");
-    editBtn.textContent = ""
+    // Tambahkan tombol "Edit" di sini.
+    const edit = document.createElement("button");
+    edit.className = "editbtn";
+    edit.textContent = "Edit";
+
+    edit.addEventListener("click", function () {
+      const box = document.createElement("input");
+      box.type = "text";
+      box.className = "editbox";
+      box.value = task.text;
+
+      const save = document.createElement("button");
+      save.className = "savebtn";
+      save.textContent = "Simpan";
+
+      function simpan() {
+        edittask(task.id, box.value);
+      }
+      save.addEventListener("click", function () {
+        simpan();
+      });
+      box.addEventListener("keyup", function (e) {
+        if (e.key === "Enter") {
+          simpan();
+        }
+      });
+
+      li.replaceChild(box, span);
+      li.replaceChild(save, edit);
+      box.focus();
+    });
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
@@ -89,6 +115,7 @@ function renderTasks() {
 
     li.appendChild(checkBtn);
     li.appendChild(span);
+    li.appendChild(edit);
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
   });
@@ -137,7 +164,23 @@ function toggleComplete(id) {
 
 // TODO (Fitur #2 - Edit Task):
 // Buat function editTask(id, newText) yang mengubah task.text
-// untuk task dengan id yang cocok, lalu panggil renderTasks().
+function edittask(id, newText) {
+
+  const str = newText.trim();
+
+  if (str === "") {
+    renderTasks();
+    return;
+  }
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      tasks[i].text = str;
+      break;
+    }
+  }
+
+  renderTasks();
+}
 
 // TODO (Fitur #6 - Clear Completed):
 // Buat function clearCompleted() yang menghapus semua task dengan
