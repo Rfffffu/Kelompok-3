@@ -43,20 +43,42 @@ function renderTasks() {
     // Tambahkan <input type="checkbox"> di sini yang mencerminkan
     // task.completed, dan tambahkan class "completed" pada `li`
     // kalau task.completed === true.
+    const checkBtn = document.createElement("input");
+    checkBtn.type = "checkbox";
+    checkBtn.className = "check-btn";
+    checkBtn.checked = task.completed;
+    if (task.completed) {
+      li.classList.add("completed");
+    }
+
+    checkBtn.addEventListener("change", () => {
+      if (checkBtn.checked) {
+        li.classList.add("completed");
+        task.completed = true;
+      } else {
+        li.classList.remove("completed");
+        task.completed = false;
+      }
+    });
+    //TODO (Fitur #1 - ENDS)
 
     const span = document.createElement("span");
     span.textContent = task.text;
+    span.className = "task-text";
 
     // TODO (Fitur #2 - Edit Task):
     // Tambahkan tombol "Edit" di sini. Saat diklik, ganti `span`
     // menjadi <input> berisi teks task supaya bisa diubah,
     // lalu simpan perubahannya saat user menekan Enter / klik Save.
+    const editBtn = document.createElement("button");
+    editBtn.textContent = ""
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
     deleteBtn.textContent = "✕";
     deleteBtn.addEventListener("click", () => deleteTask(task.id));
 
+    li.appendChild(checkBtn);
     li.appendChild(span);
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
