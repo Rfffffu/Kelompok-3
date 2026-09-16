@@ -124,3 +124,17 @@ h1 {
   Tambahkan style untuk .footer yang berisi counter task dan tombol
   "Hapus yang Selesai".
 */
+.footer {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid #4f46e5;
+}
+
+#task-counter {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
