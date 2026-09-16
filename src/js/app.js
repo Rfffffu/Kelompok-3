@@ -40,6 +40,9 @@ function renderTasks() {
     emptyState.className = "empty-state";
     emptyState.textContent = "Belum ada task. Tambahkan satu di atas!";
     taskList.appendChild(emptyState);
+
+    // ketika list kosong perlu disave agar tidak menyisakan 1 task yg dihapus
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     return;
   }
 
