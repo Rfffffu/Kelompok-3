@@ -193,7 +193,7 @@ function clearCompleted() {
 }
 
 const delCompleted = document.querySelector(".del-completed");
-delCompleted.addEventListener("click", clearCompleted());
+delCompleted.addEventListener("click", clearCompleted);
 
 // TODO (Fitur #3 - Filter Task):
 // Simpan filter yang sedang aktif di sebuah variabel, misalnya
