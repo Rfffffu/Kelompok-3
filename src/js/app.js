@@ -14,11 +14,23 @@ const taskList = document.getElementById("task-list");
 let tasks = [];
 let nextId = 1;
 
-// TODO (Fitur #4 - Simpan ke localStorage):
-// Saat aplikasi pertama kali dibuka, load "tasks" dari localStorage
-// (kalau ada) sebelum renderTasks() dipanggil pertama kali di bawah.
-// Hint: gunakan JSON.parse(localStorage.getItem("tasks")) dan cek
-// null-nya sebelum dipakai.
+function loadTasks() {
+  const stored = localStorage.getItem("tasks");
+  if (!stored) return;
+
+  try {
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return;
+
+    tasks = parsed;
+    nextId = Math.max(0, ...tasks.map((task) => task.id)) + 1;
+  } catch {
+    // data malformat/diubah atau browser error
+    tasks = [];
+    nextId = 1;
+    localStorage.removeItem("tasks");
+  }
+}
 
 function renderTasks() {
   taskList.innerHTML = "";
@@ -28,6 +40,9 @@ function renderTasks() {
     emptyState.className = "empty-state";
     emptyState.textContent = "Belum ada task. Tambahkan satu di atas!";
     taskList.appendChild(emptyState);
+
+    // ketika list kosong perlu disave agar tidak menyisakan 1 task yg dihapus
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     return;
   }
 
@@ -89,7 +104,7 @@ function renderTasks() {
   // TODO (Fitur #4 - Simpan ke localStorage):
   // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
   // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
-  // Hint: localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask(text) {
@@ -142,4 +157,5 @@ taskForm.addEventListener("submit", (event) => {
   taskInput.focus();
 });
 
+loadTasks();
 renderTasks();
