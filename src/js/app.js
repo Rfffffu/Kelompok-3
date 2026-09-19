@@ -187,6 +187,13 @@ function edittask(id, newText) {
 // Buat function clearCompleted() yang menghapus semua task dengan
 // completed === true dari array "tasks", lalu panggil renderTasks().
 // Jangan lupa tambahkan event listener untuk tombol #clear-completed.
+function clearCompleted() {
+  tasks = tasks.filter((task) => !task.completed);
+  renderTasks();
+}
+
+const delCompleted = document.querySelector(".del-completed");
+delCompleted.addEventListener("click", clearCompleted());
 
 // TODO (Fitur #3 - Filter Task):
 // Simpan filter yang sedang aktif di sebuah variabel, misalnya

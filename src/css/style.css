@@ -220,7 +220,6 @@ input[type="checkbox"]:active {
   TODO (Fitur #5 & #6 - Counter & Clear Completed):
   Tambahkan style untuk .footer yang berisi counter task dan tombol
   "Hapus yang Selesai".
-<<<<<<< HEAD
 */
 .footer {
   display: flex;
@@ -228,6 +227,7 @@ input[type="checkbox"]:active {
   margin-top: 15px;
   padding-top: 12px;
   border-top: 1px solid #4f46e5;
+  justify-content: space-between;
 }
 
 #task-counter {
@@ -236,6 +236,23 @@ input[type="checkbox"]:active {
   font-weight: 500;
 }
 
-=======
-*/
->>>>>>> b109b87 (feat: implement fitur edit task)
+.del-completed {
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.del-completed:hover {
+  background-color: #dc2626; /* merah lebih gelap saat di-hover */
+  transform: scale(1.05);
+}
+
+.del-completed:active {
+  transform: scale(0.9);
+}
