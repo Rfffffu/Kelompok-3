@@ -87,16 +87,33 @@ h1 {
 }
 
 .task-item .delete-btn {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;              
+  height: 32px;
+
   border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;    
+  border: none;
+
   background: transparent;
   color: #ef4444;
   font-size: 1.1rem;
   cursor: pointer;
   line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 .task-item .delete-btn:hover {
   color: #b91c1c;
+  transform: scale(1.1);
+  font-weight: 1000;
+  /* background-color: rgba(211, 211, 211, 0.257); */
 }
 
 .empty-state {
@@ -112,6 +129,50 @@ h1 {
   pada .task-item yang membuat teksnya dicoret (text-decoration: line-through)
   dan warnanya lebih pudar.
 */
+input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid lightgrey;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+input[type="checkbox"]:hover {
+  border-color: #2ecc71;
+  transform: scale(1.1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  transform: scale(1.05);
+}
+
+input[type="checkbox"]::before {
+  content: "✓";
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+input[type="checkbox"]:active {
+  transform: scale(0.9);
+}
+
+.task-item.completed .task-text{
+  text-decoration: line-through;
+  color: #8888;
+}
+
+.task-item.completed {
+  opacity: 0.65;
+}
+
 
 /* Fitur #2 - Edit Task */
 .task-item span {
@@ -160,3 +221,17 @@ h1 {
   Tambahkan style untuk .footer yang berisi counter task dan tombol
   "Hapus yang Selesai".
 */
+.footer {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid #4f46e5;
+}
+
+#task-counter {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
