@@ -52,13 +52,7 @@ function renderTasks() {
     }
 
     checkBtn.addEventListener("change", () => {
-      if (checkBtn.checked) {
-        li.classList.add("completed");
-        task.completed = true;
-      } else {
-        li.classList.remove("completed");
-        task.completed = false;
-      }
+      toggleComplete(task.id);
     });
     //TODO (Fitur #1 - ENDS)
 
@@ -119,6 +113,12 @@ function deleteTask(id) {
 // TODO (Fitur #1 - Tandai Selesai):
 // Buat function toggleComplete(id) yang membalik nilai task.completed
 // untuk task dengan id yang cocok, lalu panggil renderTasks().
+function toggleComplete(id) {
+  const task = tasks.find((task) => task.id === id);
+  if (!task) return;
+  task.completed = !task.completed;
+  renderTasks();
+}
 
 // TODO (Fitur #2 - Edit Task):
 // Buat function editTask(id, newText) yang mengubah task.text
