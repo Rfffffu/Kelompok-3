@@ -35,6 +35,18 @@ function loadTasks() {
 function renderTasks() {
   taskList.innerHTML = "";
 
+  // TODO (Fitur #4 - Simpan ke localStorage):
+  // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
+  // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  
+  // TODO (Fitur #5 - Counter):
+  // Update elemen #task-counter di sini setiap kali renderTasks() dipanggil,
+  // isinya jumlah task yang belum selesai. Contoh: "3 task tersisa".
+  const taskCounter = document.getElementById('task-counter');
+  const taskRemaining = tasks.filter((task) => !task.completed).length;
+
+  taskCounter.textContent = `${taskRemaining} task tersisa`;
   if (tasks.length === 0) {
     const emptyState = document.createElement("li");
     emptyState.className = "empty-state";
@@ -120,18 +132,7 @@ function renderTasks() {
     taskList.appendChild(li);
   });
 
-  // TODO (Fitur #5 - Counter):
-  // Update elemen #task-counter di sini setiap kali renderTasks() dipanggil,
-  // isinya jumlah task yang belum selesai. Contoh: "3 task tersisa".
-  const taskCounter = document.getElementById('task-counter');
-  const taskRemaining = tasks.filter((task) => !task.completed).length;
-
   taskCounter.textContent = `${taskRemaining} task tersisa`;
-
-  // TODO (Fitur #4 - Simpan ke localStorage):
-  // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
-  // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
-  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask(text) {
