@@ -62,6 +62,30 @@ h1 {
   Tambahkan style untuk .filters dan .filter-btn di sini.
   Tandai tombol filter yang sedang aktif, misalnya dengan class ".active".
 */
+/* Fitur #3 - Filter Task */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background: #f3f4f6;
+}
+
+.filter-btn.active {
+  background: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+}
 
 .task-list {
   list-style: none;
@@ -87,16 +111,33 @@ h1 {
 }
 
 .task-item .delete-btn {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;              
+  height: 32px;
+
   border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;    
+  border: none;
+
   background: transparent;
   color: #ef4444;
   font-size: 1.1rem;
   cursor: pointer;
   line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 .task-item .delete-btn:hover {
   color: #b91c1c;
+  transform: scale(1.1);
+  font-weight: 1000;
+  /* background-color: rgba(211, 211, 211, 0.257); */
 }
 
 .empty-state {
@@ -112,15 +153,130 @@ h1 {
   pada .task-item yang membuat teksnya dicoret (text-decoration: line-through)
   dan warnanya lebih pudar.
 */
+input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid lightgrey;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-/*
-  TODO (Fitur #2 - Edit Task):
-  Tambahkan style untuk mode edit, misalnya input text yang muncul
-  menggantikan <span> saat task sedang diedit.
-*/
+input[type="checkbox"]:hover {
+  border-color: #2ecc71;
+  transform: scale(1.1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  transform: scale(1.05);
+}
+
+input[type="checkbox"]::before {
+  content: "✓";
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+input[type="checkbox"]:active {
+  transform: scale(0.9);
+}
+
+.task-item.completed .task-text{
+  text-decoration: line-through;
+  color: #8888;
+}
+
+.task-item.completed {
+  opacity: 0.65;
+}
+
+
+/* Fitur #2 - Edit Task */
+.task-item span {
+  flex: 1;
+}
+
+.task-item .editbtn {
+  border: none;
+  background: transparent;
+  color: #4f46e5;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-left: auto;
+}
+
+.task-item .editbtn:hover {
+  text-decoration: underline;
+}
+
+.task-item .savebtn {
+  border: none;
+  background: #10b981;
+  color: white;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.task-item .savebtn:hover {
+  background: #059669;
+}
+
+.task-item .editbox {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #4f46e5;
+  border-radius: 4px;
+  font-size: 1rem;
+}
 
 /*
   TODO (Fitur #5 & #6 - Counter & Clear Completed):
   Tambahkan style untuk .footer yang berisi counter task dan tombol
   "Hapus yang Selesai".
 */
+.footer {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid #4f46e5;
+  justify-content: space-between;
+}
+
+#task-counter {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.del-completed {
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.del-completed:hover {
+  background-color: #dc2626; /* merah lebih gelap saat di-hover */
+  transform: scale(1.05);
+}
+
+.del-completed:active {
+  transform: scale(0.9);
+}
