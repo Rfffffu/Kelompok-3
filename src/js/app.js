@@ -13,6 +13,7 @@ const taskList = document.getElementById("task-list");
 // dipakai di mana pun. Itu tugas kamu di Fitur #1.
 let tasks = [];
 let nextId = 1;
+let currentFilter = "all";
 
 function loadTasks() {
   const stored = localStorage.getItem("tasks");
@@ -58,10 +59,25 @@ function renderTasks() {
     return;
   }
 
-  // TODO (Fitur #3 - Filter Task):
-  // Sebelum di-loop, filter dulu "tasks" sesuai filter aktif
-  // (semua / aktif / selesai). Sekarang semua task selalu ditampilkan.
-  tasks.forEach((task) => {
+  // Fitur #3 - Filter Task:
+  // Filter "tasks" sesuai tombol filter yang sedang aktif
+  // (semua / aktif / selesai) sebelum di-loop.
+  const filteredTasks = tasks.filter((task) => {
+    if (currentFilter === "active") return !task.completed;
+    if (currentFilter === "completed") return task.completed;
+    return true;
+  });
+
+  // Ada task, tapi tidak ada yang cocok dengan filter yang dipilih
+  if (filteredTasks.length === 0) {
+    const emptyFilter = document.createElement("li");
+    emptyFilter.className = "empty-state";
+    emptyFilter.textContent = "Tidak ada task pada filter ini.";
+    taskList.appendChild(emptyFilter);
+    return;
+  }
+
+  filteredTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "task-item";
     li.dataset.id = task.id;
@@ -195,11 +211,21 @@ function clearCompleted() {
 const delCompleted = document.querySelector(".del-completed");
 delCompleted.addEventListener("click", clearCompleted);
 
-// TODO (Fitur #3 - Filter Task):
-// Simpan filter yang sedang aktif di sebuah variabel, misalnya
-// `let currentFilter = "all";`, lalu tambahkan event listener untuk
-// setiap .filter-btn yang mengubah currentFilter dan memanggil
-// renderTasks() ulang.
+// Fitur #3 - Filter Task:
+// Ubah currentFilter saat tombol filter diklik, tandai tombol yang aktif,
+// lalu render ulang daftar task.
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+
+    filterButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    renderTasks();
+  });
+});
 
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
